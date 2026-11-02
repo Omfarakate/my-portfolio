@@ -15,43 +15,45 @@ const Career = () => {
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Position In Company</h4>
-                <h5>Company Name</h5>
-              </div>
-              <h3>20XX</h3>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-              labore sit non ipsum temporibus quidem, deserunt eaque officiis
-              mollitia ratione suscipit repellat.
-            </p>
-          </div>
-          <div className="career-info-box">
-            <div className="career-info-in">
-              <div className="career-role">
-                <h4>Position In Company</h4>
-                <h5>Company Name</h5>
-              </div>
-              <h3>20XX</h3>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-              labore sit non ipsum temporibus quidem, deserunt eaque officiis
-              mollitia ratione suscipit repellat.
-            </p>
-          </div>
-          <div className="career-info-box">
-            <div className="career-info-in">
-              <div className="career-role">
-                <h4>Position In Company</h4>
-                <h5>Company Name</h5>
+                <h4>Software Engineer</h4>
+                <h5>Hidden Brains Infotech</h5>
               </div>
               <h3>NOW</h3>
             </div>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-              labore sit non ipsum temporibus quidem, deserunt eaque officiis
-              mollitia ratione suscipit repellat.
+              Built and shipped 2+ full-stack features for a production SaaS
+              application using MERN, Next.js, and NestJS for 1,000+ active
+              users. Designed 30+ RESTful APIs with JWT & RBAC, cutting response
+              times by 36%. Architected a base62 URL shortener and a dynamic
+              custom field engine across 20+ CRM products.
+            </p>
+          </div>
+          <div className="career-info-box">
+            <div className="career-info-in">
+              <div className="career-role">
+                <h4>B.Tech in Data Science</h4>
+                <h5>DKTE Textile & Eng. Institute</h5>
+              </div>
+              <h3>2026</h3>
+            </div>
+            <p>
+              Bachelor of Technology in Data Science (CGPA: 8.10/10). Focused on
+              data structures, algorithms, machine learning pipelines, and
+              database architecture.
+            </p>
+          </div>
+          <div className="career-info-box">
+            <div className="career-info-in">
+              <div className="career-role">
+                <h4>B.Tech in Computer Engineering</h4>
+                <h5>DKTE Textile & Eng. Institute</h5>
+              </div>
+              <h3>2026</h3>
+            </div>
+            <p>
+              Bachelor of Technology in Computer Engineering (CGPA: 7.81/10).
+              Solved 180+ problems on LeetCode with strong algorithmic
+              foundation and earned the LeetCode Consistency Badge.
             </p>
           </div>
         </div>
