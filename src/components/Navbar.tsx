@@ -3,6 +3,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HoverLinks from "./HoverLinks";
 import { gsap } from "gsap";
 import { ScrollSmoother } from "gsap-trial/ScrollSmoother";
+import { FiSearch } from "react-icons/fi";
 import "./styles/Navbar.css";
 
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
@@ -23,14 +24,14 @@ const Navbar = () => {
     smoother.scrollTop(0);
     smoother.paused(true);
 
-    let links = document.querySelectorAll(".header ul a");
+    const links = document.querySelectorAll(".header ul a");
     links.forEach((elem) => {
-      let element = elem as HTMLAnchorElement;
+      const element = elem as HTMLAnchorElement;
       element.addEventListener("click", (e) => {
         if (window.innerWidth > 1024) {
           e.preventDefault();
-          let elem = e.currentTarget as HTMLAnchorElement;
-          let section = elem.getAttribute("data-href");
+          const elem = e.currentTarget as HTMLAnchorElement;
+          const section = elem.getAttribute("data-href");
           smoother.scrollTo(section, true, "top top");
         }
       });
@@ -39,6 +40,21 @@ const Navbar = () => {
       ScrollSmoother.refresh(true);
     });
   }, []);
+
+  const isMac =
+    typeof navigator !== "undefined" &&
+    /Mac|iPod|iPhone|iPad/.test(navigator.platform);
+
+  const openCommandPalette = () => {
+    window.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "k",
+        metaKey: isMac,
+        ctrlKey: !isMac,
+      })
+    );
+  };
+
   return (
     <>
       <div className="header">
@@ -53,6 +69,19 @@ const Navbar = () => {
           omfarkate7515@gmail.com
         </a>
         <ul>
+          <li>
+            <button
+              className="cmd-nav-trigger"
+              onClick={openCommandPalette}
+              data-cursor="disable"
+              type="button"
+              title={`Command Palette (${isMac ? "⌘K" : "Ctrl+K"})`}
+            >
+              <FiSearch style={{ fontSize: "12px", color: "var(--accentColor)" }} />
+              <span className="cmd-nav-label">Menu</span>
+              <span className="cmd-nav-key-badge">{isMac ? "⌘K" : "Ctrl+K"}</span>
+            </button>
+          </li>
           <li>
             <a data-href="#about" href="#about">
               <HoverLinks text="ABOUT" />

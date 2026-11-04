@@ -9,6 +9,9 @@ import SocialIcons from "./SocialIcons";
 import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 import setSplitText from "./utils/splitText";
+import CommandPalette from "./CommandPalette/CommandPalette";
+import ArchitecturePlayground from "./Architecture/ArchitecturePlayground";
+import ImpactMetrics from "./Metrics/ImpactMetrics";
 
 const TechStack = lazy(() => import("./TechStack"));
 
@@ -32,6 +35,7 @@ const MainContainer = ({ children }: PropsWithChildren) => {
   return (
     <div className="container-main">
       <Cursor />
+      <CommandPalette />
       <Navbar />
       <SocialIcons />
       {isDesktopView && children}
@@ -40,9 +44,11 @@ const MainContainer = ({ children }: PropsWithChildren) => {
           <div className="container-main">
             <Landing>{!isDesktopView && children}</Landing>
             <About />
+            <ImpactMetrics />
             <WhatIDo />
             <Career />
             <Work />
+            <ArchitecturePlayground />
             {isDesktopView && (
               <Suspense fallback={<div>Loading....</div>}>
                 <TechStack />

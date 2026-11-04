@@ -1,0 +1,645 @@
+/* Architecture Playground Container */
+.arch-section {
+  width: 100%;
+  position: relative;
+  padding: 80px 0 100px;
+  background: radial-gradient(circle at 50% 0%, rgba(194, 164, 255, 0.05) 0%, transparent 60%),
+              #07050a;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.arch-container {
+  width: var(--cWidth, 90%);
+  max-width: 1240px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* Section Header */
+.arch-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.arch-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(194, 164, 255, 0.08);
+  border: 1px solid rgba(194, 164, 255, 0.25);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accentColor, #c2a4ff);
+  margin-bottom: 16px;
+}
+
+.arch-header h2 {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  margin: 0 0 12px;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+.arch-header h2 span {
+  background: linear-gradient(135deg, #c2a4ff 0%, #a78bfa 50%, #e9d5ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.arch-header p {
+  font-size: clamp(14px, 2vw, 17px);
+  color: rgba(255, 255, 255, 0.65);
+  max-width: 680px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* System Tabs */
+.arch-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.arch-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.arch-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  border-color: rgba(194, 164, 255, 0.2);
+}
+
+.arch-tab-btn.active {
+  background: rgba(194, 164, 255, 0.12);
+  border-color: rgba(194, 164, 255, 0.45);
+  color: #fff;
+  box-shadow: 0 0 25px -5px rgba(194, 164, 255, 0.2);
+}
+
+/* Playground Card Shell */
+.arch-card {
+  background: #0d0b13;
+  border: 1px solid rgba(194, 164, 255, 0.18);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8),
+              0 0 50px -15px rgba(194, 164, 255, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Metrics Top HUD */
+.arch-metrics-hud {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  padding: 20px 24px;
+  background: #110e1a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.arch-metric-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.arch-metric-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(194, 164, 255, 0.08);
+  border: 1px solid rgba(194, 164, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accentColor, #c2a4ff);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.arch-metric-data {
+  display: flex;
+  flex-direction: column;
+}
+
+.arch-metric-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.arch-metric-val {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  font-feature-settings: "tnum";
+}
+
+.arch-metric-val.green {
+  color: #4ade80;
+}
+
+.arch-metric-val.purple {
+  color: #c2a4ff;
+}
+
+.arch-metric-val.cyan {
+  color: #38bdf8;
+}
+
+/* Interactive Control Bar */
+.arch-control-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+  background: #0f0c17;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-wrap: wrap;
+}
+
+.arch-input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 260px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 8px 14px;
+}
+
+.arch-input-icon {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 15px;
+}
+
+.arch-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.arch-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.arch-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.arch-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+  border: none;
+}
+
+.arch-action-btn.primary {
+  background: linear-gradient(135deg, #9333ea 0%, #7c3aed 100%);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(147, 51, 234, 0.3);
+}
+
+.arch-action-btn.primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(147, 51, 234, 0.45);
+}
+
+.arch-action-btn.secondary {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.arch-action-btn.secondary:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(194, 164, 255, 0.3);
+}
+
+.arch-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Preset Quick Pills */
+.arch-presets {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: #0c0912;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+  flex-wrap: wrap;
+}
+
+.arch-preset-pill {
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.arch-preset-pill:hover {
+  background: rgba(194, 164, 255, 0.15);
+  border-color: rgba(194, 164, 255, 0.3);
+  color: #fff;
+}
+
+/* Diagram Visual Canvas */
+.arch-canvas-stage {
+  padding: 40px 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: radial-gradient(circle at 50% 50%, rgba(194, 164, 255, 0.03) 0%, transparent 80%),
+              #0a0810;
+  min-height: 290px;
+  overflow-x: auto;
+}
+
+/* Individual System Nodes */
+.arch-node {
+  flex: 1;
+  min-width: 170px;
+  max-width: 220px;
+  background: #13101b;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.arch-node.active-pulse {
+  border-color: var(--accentColor, #c2a4ff);
+  box-shadow: 0 0 30px rgba(194, 164, 255, 0.25),
+              0 0 0 2px rgba(194, 164, 255, 0.2);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.arch-node.cache-hit-pulse {
+  border-color: #4ade80;
+  box-shadow: 0 0 30px rgba(74, 222, 128, 0.3),
+              0 0 0 2px rgba(74, 222, 128, 0.25);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.arch-node.cache-miss-pulse {
+  border-color: #f87171;
+  box-shadow: 0 0 30px rgba(248, 113, 113, 0.25);
+}
+
+.arch-node-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.arch-node-badge.client {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.arch-node-badge.gateway {
+  background: rgba(234, 179, 8, 0.12);
+  color: #facc15;
+  border: 1px solid rgba(234, 179, 8, 0.25);
+}
+
+.arch-node-badge.redis {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.arch-node-badge.mysql {
+  background: rgba(59, 130, 246, 0.12);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.25);
+}
+
+.arch-node-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arch-node-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.arch-node-desc {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.4;
+}
+
+.arch-node-status {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #4ade80;
+}
+
+.arch-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 6px #4ade80;
+}
+
+/* Connector Arrow Between Nodes */
+.arch-connector {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: rgba(255, 255, 255, 0.25);
+  position: relative;
+  min-width: 40px;
+}
+
+.arch-connector-line {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.arch-connector-line.active::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, #c2a4ff, transparent);
+  animation: linePulse 0.9s infinite linear;
+}
+
+@keyframes linePulse {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
+
+.arch-connector-tag {
+  font-size: 9px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.5px;
+}
+
+/* Real-Time Terminal Event Log */
+.arch-console-drawer {
+  background: #07050a;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 16px 24px;
+}
+
+.arch-console-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.arch-console-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.arch-console-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 8px #4ade80;
+}
+
+.arch-console-logs {
+  background: #0a0810;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 12px 16px;
+  max-height: 160px;
+  overflow-y: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #d1c8db;
+}
+
+.arch-log-line {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.arch-log-time {
+  color: rgba(255, 255, 255, 0.35);
+  flex-shrink: 0;
+}
+
+.arch-log-type {
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.arch-log-type.hit {
+  color: #4ade80;
+}
+
+.arch-log-type.miss {
+  color: #f87171;
+}
+
+.arch-log-type.info {
+  color: #38bdf8;
+}
+
+.arch-log-type.hash {
+  color: #c2a4ff;
+}
+
+.arch-log-msg {
+  color: #eae5ec;
+  word-break: break-all;
+}
+
+/* SyncLab Multi-Client Mode */
+.arch-synclab-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 20px;
+  align-items: center;
+  padding: 30px 24px;
+  background: #0a0810;
+}
+
+.arch-editor-window {
+  background: #110e1a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.arch-editor-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: #0a0810;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.arch-editor-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.arch-editor-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.arch-editor-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.arch-editor-body {
+  padding: 14px;
+  font-family: ui-monospace, Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #e2e8f0;
+  min-height: 120px;
+}
+
+.arch-editor-textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-family: inherit;
+  font-size: inherit;
+  resize: none;
+}
+
+.arch-cursor-pill {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.arch-cursor-pill.a {
+  background: rgba(194, 164, 255, 0.3);
+  color: #c2a4ff;
+}
+
+.arch-cursor-pill.b {
+  background: rgba(56, 189, 248, 0.3);
+  color: #38bdf8;
+}
+
+@media screen and (max-width: 900px) {
+  .arch-canvas-stage {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .arch-node {
+    max-width: 100%;
+  }
+  .arch-connector {
+    transform: rotate(90deg);
+    margin: 8px auto;
+  }
+  .arch-synclab-grid {
+    grid-template-columns: 1fr;
+  }
+}

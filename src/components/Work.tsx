@@ -55,14 +55,14 @@ const Work = () => {
       const parent = box[0].parentElement;
       if (!parent) return;
       const parentWidth = parent.getBoundingClientRect().width;
-      let padding: number =
+      const padding: number =
         parseInt(window.getComputedStyle(box[0]).padding) / 2;
       translateX = rect.width * box.length - (rectLeft + parentWidth) + padding;
     }
 
     setTranslateX();
 
-    let timeline = gsap.timeline({
+    const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: ".work-section",
         start: "top top",

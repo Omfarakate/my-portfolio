@@ -1,0 +1,471 @@
+/* Command Palette Overlay */
+.cmd-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 3, 6, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 99999;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 80px 16px 24px;
+  animation: cmdFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cmdFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal Container */
+.cmd-dialog {
+  width: 100%;
+  max-width: 640px;
+  background: #0f0d14;
+  border: 1px solid rgba(194, 164, 255, 0.18);
+  box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.8),
+              0 0 0 1px rgba(255, 255, 255, 0.04),
+              0 0 40px -10px rgba(194, 164, 255, 0.12);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: cmdScaleUp 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cmdScaleUp {
+  from {
+    transform: scale(0.96) translateY(-8px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Search Header */
+.cmd-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  background: #13101a;
+}
+
+.cmd-search-icon {
+  font-size: 20px;
+  color: var(--accentColor, #c2a4ff);
+  flex-shrink: 0;
+}
+
+.cmd-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #fff;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.cmd-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.cmd-esc-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cmd-esc-badge:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+/* Tabs: Commands vs Terminal */
+.cmd-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px 8px;
+  background: #0f0d14;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cmd-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cmd-tab-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.cmd-tab-btn.active {
+  color: #fff;
+  background: rgba(194, 164, 255, 0.12);
+  border-color: rgba(194, 164, 255, 0.3);
+}
+
+/* Terminal Console View */
+.cmd-terminal-view {
+  background: #09070c;
+  padding: 16px 20px;
+  max-height: 380px;
+  overflow-y: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #d1c8db;
+}
+
+.cmd-terminal-output {
+  margin-bottom: 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.cmd-terminal-prompt-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accentColor, #c2a4ff);
+  font-weight: 600;
+}
+
+.cmd-terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.cmd-terminal-hints {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.cmd-terminal-hint-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 2px 7px;
+  border-radius: 4px;
+  color: #c2a4ff;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.cmd-terminal-hint-chip:hover {
+  background: rgba(194, 164, 255, 0.15);
+  color: #fff;
+}
+
+/* Results List */
+.cmd-results {
+  max-height: 380px;
+  overflow-y: auto;
+  padding: 10px 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cmd-results::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cmd-results::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+.cmd-category-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: rgba(255, 255, 255, 0.35);
+  padding: 8px 12px 4px;
+  margin-top: 4px;
+}
+
+/* Item Row */
+.cmd-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: #dcd7e2;
+  cursor: pointer;
+  transition: background 0.12s ease, transform 0.1s ease;
+  user-select: none;
+}
+
+.cmd-item:hover,
+.cmd-item.selected {
+  background: rgba(194, 164, 255, 0.12);
+  color: #fff;
+}
+
+.cmd-item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.cmd-item-icon {
+  font-size: 17px;
+  color: var(--accentColor, #c2a4ff);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.cmd-item-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.cmd-item-title {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cmd-item-desc {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1px;
+}
+
+.cmd-item-badge {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: rgba(194, 164, 255, 0.85);
+  background: rgba(194, 164, 255, 0.08);
+  border: 1px solid rgba(194, 164, 255, 0.18);
+  padding: 2px 7px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.cmd-no-results {
+  padding: 40px 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 14px;
+}
+
+/* Footer Instructions */
+.cmd-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: #0b090f;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.cmd-shortcuts {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cmd-shortcut-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cmd-kbd {
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 4px;
+  padding: 2px 5px;
+  color: #fff;
+}
+
+.cmd-powered-by {
+  font-size: 11px;
+  color: rgba(194, 164, 255, 0.6);
+  font-weight: 500;
+}
+
+/* Toast Message */
+.cmd-toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1b1724;
+  border: 1px solid rgba(194, 164, 255, 0.35);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 100000;
+  animation: toastBounce 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes toastBounce {
+  from {
+    transform: translate(-50%, 15px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+/* Navbar & Floating Trigger Buttons */
+.cmd-nav-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(194, 164, 255, 0.28);
+  border-radius: 8px;
+  color: #f1edfa;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.cmd-nav-trigger:hover {
+  background: rgba(194, 164, 255, 0.12);
+  border-color: rgba(194, 164, 255, 0.35);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.cmd-nav-key-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--accentColor, #c2a4ff);
+}
+
+/* Floating Corner Trigger (Visible on all viewports) */
+.cmd-floating-trigger {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(15, 13, 20, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(194, 164, 255, 0.25);
+  border-radius: 9999px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6),
+              0 0 15px -3px rgba(194, 164, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.cmd-floating-trigger:hover {
+  transform: translateY(-2px) scale(1.02);
+  border-color: rgba(194, 164, 255, 0.6);
+  box-shadow: 0 14px 30px -5px rgba(0, 0, 0, 0.7),
+              0 0 25px -2px rgba(194, 164, 255, 0.35);
+}
+
+@media screen and (max-width: 768px) {
+  .cmd-backdrop {
+    padding: 30px 12px 16px;
+    align-items: flex-start;
+  }
+  .cmd-dialog {
+    max-height: 85vh;
+  }
+  .cmd-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .cmd-floating-trigger {
+    bottom: 16px;
+    right: 16px;
+    padding: 7px 12px;
+    font-size: 11px;
+  }
+}
